@@ -8,4 +8,8 @@ public class Deck {
 	public Deck() {
 		cards = new ArrayList<Card>();
 	};
+	
+	public ArrayList<Card> getCards() {
+		return cards;
+	}
 }
