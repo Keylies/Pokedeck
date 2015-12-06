@@ -5,8 +5,8 @@ public class Main extends JFrame {
 
 	public static void main(String[] args) {
 		
-		Menu menu = new Menu();
-		menu.constructGUI();
+		AddCardView addCardView = new AddCardView();
+		addCardView.constructGUI();
 		
 //		Card grassCard = new Energy("Grass");
 //		Card bulbizarre = new Pokemon("Bulbizarre", "Bulbe bizarre", 1, "Grass", 100);
