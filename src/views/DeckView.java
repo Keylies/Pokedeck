@@ -32,7 +32,7 @@ public class DeckView extends JPanel {
 		
 		titleLbl = new JLabel("Pokedeck");
 		
-		addViewBtn = new JButton("Add cards");
+		addViewBtn = new JButton("Add cards menu");
 		addViewBtn.addActionListener(contentCtrl);
 		
 		constructSearchPanel();

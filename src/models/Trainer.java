@@ -1,3 +1,4 @@
+package models;
 
 public class Trainer extends Card {
 	public static String[] trainerTypes = 

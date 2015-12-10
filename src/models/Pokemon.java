@@ -1,3 +1,4 @@
+package models;
 import java.util.ArrayList;
 
 
@@ -22,6 +23,6 @@ public class Pokemon extends Card {
 		return "Pokemon card : " + cardName + " (n°" + cardNumber + ")\n"
 				+ "\t\t. Type : " + pokemonType + "\n"
 				+ "\t\t. HP : " + pokemonHp + "\n"
-				+ "\t\t. Text : " + cardText + "\n";
+				+ "\t\t. Text : " + cardDesc + "\n";
 	}
 }

@@ -1,3 +1,4 @@
+package models;
 
 public class Energy extends Card {
 	public static String[] energyTypes = 

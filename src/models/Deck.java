@@ -1,3 +1,4 @@
+package models;
 import java.util.ArrayList;
 
 
@@ -11,5 +12,9 @@ public class Deck {
 	
 	public ArrayList<Card> getCards() {
 		return cards;
+	}
+	
+	public void addToDeck(Card newCard) {
+		cards.add(newCard);
 	}
 }

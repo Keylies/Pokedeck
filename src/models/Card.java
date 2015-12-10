@@ -1,3 +1,4 @@
+package models;
 
 
 public class Card {
@@ -10,30 +11,30 @@ public class Card {
 	
 	//protected String cardType;
 	protected String cardName;
-	protected String cardText;
+	protected String cardDesc;
 	protected int cardNumber;
 	
 	public Card() {
 		//cardType = "Blank card";
 		cardName = "Blank card";
-		cardText = "Blank card";
+		cardDesc = "Blank card";
 		cardNumber = 0;
 	}
 
 	public Card(String name, int number) {
 		cardName = name;
 		cardNumber = number;
-		cardText = null;
+		cardDesc = null;
 	}
 	
-	public Card(String name, String text, int number) {
+	public Card(String name, String desc, int number) {
 		cardName = name;
 		cardNumber = number;
-		cardText = text;
+		cardDesc = desc;
 	}
 	
-	public void changeText(String newText) {
-		cardText = newText;
+	public void changeText(String newDesc) {
+		cardDesc = newDesc;
 	}
 	
 }

@@ -1,13 +1,16 @@
 import javax.swing.JFrame;
 
+import views.FrameView;
+
 
 public class Main extends JFrame {
 
 	public static void main(String[] args) {
 		
-		AddCardView addCardView = new AddCardView();
-		addCardView.constructGUI();
+		FrameView mainFrame = new FrameView();
+		mainFrame.constructGUI();
 		
+	
 //		Card grassCard = new Energy("Grass");
 //		Card bulbizarre = new Pokemon("Bulbizarre", "Bulbe bizarre", 1, "Grass", 100);
 //		Card sacha = new Trainer("Sacha", "Le meilleur dresseur", 200, "Supporter", "Gogogogo");

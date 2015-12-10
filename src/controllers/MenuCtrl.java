@@ -1,3 +1,4 @@
+package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -5,7 +6,7 @@ import java.awt.event.ActionListener;
 public class MenuCtrl implements ActionListener {
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent evt) {
 		
 	}
 

@@ -13,17 +13,10 @@ import controllers.MenuCtrl;
 
 public class FrameView extends JFrame {
 	
-	private JPanel content;
+	JPanel content;
 	
-	private DeckView deckView;
-	private AddView addView;
+	JMenuBar menuBar;
 	
-	private JMenuBar menuBar;
-	private JMenu menuFile;
-	private JMenuItem importItem;
-	
-	private ContentCtrl contentCtrl;
-
 	public FrameView () {
 		super();
 	}
@@ -35,17 +28,18 @@ public class FrameView extends JFrame {
 		
 		this.setTitle("Pokedeck, gotta catch 'em all");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(600, 600);
+		this.setSize(800, 800);
 		this.setJMenuBar(menuBar);
 		this.add(content);
+
 		this.setVisible(true);
 	}
 	
 	private void constructMenu() {
 		
 		menuBar = new JMenuBar();
-		menuFile = new JMenu("File");
-		importItem = new JMenuItem("Import");
+		JMenu menuFile = new JMenu("File");
+		JMenuItem importItem = new JMenuItem("Import");
 		
 		importItem.addActionListener(new MenuCtrl());
 		
@@ -57,15 +51,27 @@ public class FrameView extends JFrame {
 		
 		content = new JPanel(new CardLayout());
 		
-		contentCtrl = new ContentCtrl(content);
+		ContentCtrl contentCtrl = new ContentCtrl(content);
 		
-		deckView = new DeckView();
+		DeckView deckView = new DeckView();
 		deckView.constructPanel(contentCtrl);
 		
-		addView = new AddView();
+		AddMenuView addView = new AddMenuView();
 		addView.constructPanel(contentCtrl);
 		
+		AddPokemonView addPokemonView = new AddPokemonView(contentCtrl);
+		addPokemonView.constructPanel();
+		
+		AddTrainerView addTrainerView = new AddTrainerView(contentCtrl);
+		addTrainerView.constructPanel();
+		
+		AddEnergyView addEnergyView = new AddEnergyView(contentCtrl);
+		addEnergyView.constructPanel();
+		
 		content.add(deckView, "Deck");
-		content.add(addView, "Add cards");
+		content.add(addView, "Add cards menu");
+		content.add(addPokemonView, "Add Pokemon card");
+		content.add(addTrainerView, "Add Trainer card");
+		content.add(addEnergyView, "Add Energy card");
 	}
 }
