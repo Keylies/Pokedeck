@@ -1,21 +1,26 @@
 package views;
 
 import java.awt.GridLayout;
+import java.util.HashMap;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import models.Deck;
 import models.Trainer;
 import controllers.AddTrainerCtrl;
 import controllers.ContentCtrl;
 
 public class AddTrainerView extends AddView {
 	
+	private Deck deck;
+	
 	private JTextField ruleTxt;
 
-	public AddTrainerView(ContentCtrl ct) {
+	public AddTrainerView(ContentCtrl ct, Deck d) {
 		super(ct);
+		deck = d;
 	}
 	
 	public void constructPanel() {
@@ -48,11 +53,20 @@ public class AddTrainerView extends AddView {
 		JLabel ruleLbl = new JLabel("Rule");
 		ruleTxt = new JTextField();
 		
-		addBtn.addActionListener(new AddTrainerCtrl(this));
+		addBtn.addActionListener(new AddTrainerCtrl(this, deck));
 		
 		contentPnl.add(ruleLbl);
 		contentPnl.add(ruleTxt);
 		
 		contentPnl.add(addBtn);
+	}
+	
+	public HashMap<String, String> getData() {
+
+		setData();
+		
+		data.put("rule", ruleTxt.getText());
+		
+		return data;
 	}
 }

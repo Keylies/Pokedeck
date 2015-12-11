@@ -15,16 +15,9 @@ public class Card {
 	protected int cardNumber;
 	
 	public Card() {
-		//cardType = "Blank card";
 		cardName = "Blank card";
 		cardDesc = "Blank card";
 		cardNumber = 0;
-	}
-
-	public Card(String name, int number) {
-		cardName = name;
-		cardNumber = number;
-		cardDesc = null;
 	}
 	
 	public Card(String name, String desc, int number) {

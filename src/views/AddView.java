@@ -1,6 +1,8 @@
 package views;
 
 import java.awt.GridLayout;
+import java.util.HashMap;
+import java.util.Hashtable;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -8,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
 import controllers.ContentCtrl;
 
 abstract public class AddView extends JPanel {
@@ -19,9 +22,14 @@ abstract public class AddView extends JPanel {
 	
 	protected JLabel titleLbl;
 	
+	protected JTextField nameTxt;
+	protected JTextArea descTxt;
+	protected JTextField numberTxt;
 	protected JComboBox<String> typeTxt;
 	
 	protected JButton addBtn;
+	
+	protected HashMap<String, String> data;
 	
 	protected AddView(ContentCtrl ct) {
 		super();
@@ -49,16 +57,16 @@ abstract public class AddView extends JPanel {
 		contentPnl = new JPanel();
 		
 		JLabel nameLbl = new JLabel("Name");
-		JTextField nameTxt = new JTextField();
+		nameTxt = new JTextField();
 		
 		JLabel typeLbl = new JLabel("Type");
 		typeTxt = new JComboBox<String>();
 		
 		JLabel descLbl = new JLabel("Description");
-		JTextArea descTxt = new JTextArea();
+		descTxt = new JTextArea();
 		
 		JLabel numberLbl = new JLabel("Number");
-		JTextField numberTxt = new JTextField();
+		numberTxt = new JTextField();
 		
 		addBtn = new JButton("Add");
 		
@@ -73,6 +81,17 @@ abstract public class AddView extends JPanel {
 		
 		contentPnl.add(numberLbl);
 		contentPnl.add(numberTxt);
+		
+	}
+	
+	protected void setData() {
+		
+		data = new HashMap<String, String>();
+		
+		data.put("name", nameTxt.getText());
+		data.put("type", (String) typeTxt.getSelectedItem());
+		data.put("desc", descTxt.getText());
+		data.put("number", numberTxt.getText());
 	}
 
 }

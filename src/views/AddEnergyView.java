@@ -1,20 +1,21 @@
 package views;
 
 import java.awt.GridLayout;
+import java.util.HashMap;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTextField;
-
+import models.Deck;
 import models.Energy;
-import models.Trainer;
 import controllers.AddEnergyCtrl;
-import controllers.AddTrainerCtrl;
 import controllers.ContentCtrl;
 
 public class AddEnergyView extends AddView {
+	
+	private Deck deck;
 
-	public AddEnergyView(ContentCtrl ct) {
+	public AddEnergyView(ContentCtrl ct, Deck d) {
 		super(ct);
+		deck = d;
 	}
 	
 	public void constructPanel() {
@@ -44,8 +45,15 @@ public class AddEnergyView extends AddView {
 		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(Energy.energyTypes);
 		typeTxt.setModel(model);
 		
-		addBtn.addActionListener(new AddEnergyCtrl(this));
+		addBtn.addActionListener(new AddEnergyCtrl(this, deck));
 		
 		contentPnl.add(addBtn);
+	}
+	
+	public HashMap<String, String> getData() {
+
+		setData();
+		
+		return data;
 	}
 }

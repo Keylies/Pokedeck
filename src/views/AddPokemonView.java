@@ -1,21 +1,26 @@
 package views;
 
 import java.awt.GridLayout;
+import java.util.HashMap;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import models.Deck;
 import models.Energy;
 import controllers.AddPokemonCtrl;
 import controllers.ContentCtrl;
 
 public class AddPokemonView extends AddView {
 	
+	private Deck deck;
+	
 	private JTextField hpTxt;
 
-	public AddPokemonView(ContentCtrl ct) {
+	public AddPokemonView(ContentCtrl ct, Deck d) {
 		super(ct);
+		deck = d;
 	}
 	
 	public void constructPanel() {
@@ -48,11 +53,20 @@ public class AddPokemonView extends AddView {
 		JLabel hpLbl = new JLabel("HP");
 		hpTxt = new JTextField();
 		
-		addBtn.addActionListener(new AddPokemonCtrl(this));
+		addBtn.addActionListener(new AddPokemonCtrl(this, deck));
 		
 		contentPnl.add(hpLbl);
 		contentPnl.add(hpTxt);
 		
 		contentPnl.add(addBtn);
+	}
+	
+	public HashMap<String, String> getData() {
+
+		setData();
+		
+		data.put("hp", hpTxt.getText());
+		
+		return data;
 	}
 }

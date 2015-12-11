@@ -15,8 +15,8 @@ public class Trainer extends Card {
 		super();
 	}
 	
-	public Trainer(String name, String text, int number, String type, String rule) {
-		super(name, text, number);
+	public Trainer(String name, String desc, int number, String type, String rule) {
+		super(name, desc, number);
 		trainerType = type;
 		trainerRule = rule; 
 	}

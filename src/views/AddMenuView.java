@@ -19,14 +19,13 @@ public class AddMenuView extends JPanel {
 	
 	JTabbedPane tabbedPane;
 	
-	public AddMenuView() {
+	public AddMenuView(ContentCtrl contentCtrl) {
 		super();
+		this.contentCtrl = contentCtrl;
 	}
 	
-	public void constructPanel(ContentCtrl contentCtrl) {
+	public void constructPanel() {
 
-		this.contentCtrl = contentCtrl;
-		
 		this.setLayout(new GridLayout(1, 1));
 
 		constructTitlePanel();

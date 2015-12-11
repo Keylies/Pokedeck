@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 
 import controllers.ContentCtrl;
 
@@ -20,13 +21,12 @@ public class DeckView extends JPanel {
 	JButton addViewBtn;
 	JButton deckViewBtn;
 	
-	public DeckView() {
+	public DeckView(ContentCtrl contentCtrl) {
 		super();
+		this.contentCtrl = contentCtrl;
 	}
 	
-	public void constructPanel(ContentCtrl contentCtrl) {
-		
-		this.contentCtrl = contentCtrl;
+	public void constructPanel() {
 		
 		this.setLayout(new GridLayout(4, 1, 10, 10));
 		
@@ -50,5 +50,9 @@ public class DeckView extends JPanel {
 	
 	private void constructTablePanel() {
 		tablePnl = new JPanel(new GridLayout(1, 1));
+		
+		JTable table = new JTable();
+		
+		tablePnl.add(table);
 	}
 }

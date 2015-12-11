@@ -8,10 +8,13 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import models.Deck;
 import controllers.ContentCtrl;
 import controllers.MenuCtrl;
 
 public class FrameView extends JFrame {
+	
+	Deck deck;
 	
 	JPanel content;
 	
@@ -21,14 +24,16 @@ public class FrameView extends JFrame {
 		super();
 	}
 	
-	public void constructGUI() {
+	public void constructGUI(Deck d) {
+		
+		deck = d;
 		
 		constructMenu();
 		constructContent();
 		
 		this.setTitle("Pokedeck, gotta catch 'em all");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(800, 800);
+		this.setSize(600, 600);
 		this.setJMenuBar(menuBar);
 		this.add(content);
 
@@ -53,19 +58,19 @@ public class FrameView extends JFrame {
 		
 		ContentCtrl contentCtrl = new ContentCtrl(content);
 		
-		DeckView deckView = new DeckView();
-		deckView.constructPanel(contentCtrl);
+		DeckView deckView = new DeckView(contentCtrl);
+		deckView.constructPanel();
 		
-		AddMenuView addView = new AddMenuView();
-		addView.constructPanel(contentCtrl);
+		AddMenuView addView = new AddMenuView(contentCtrl);
+		addView.constructPanel();
 		
-		AddPokemonView addPokemonView = new AddPokemonView(contentCtrl);
+		AddPokemonView addPokemonView = new AddPokemonView(contentCtrl, deck);
 		addPokemonView.constructPanel();
 		
-		AddTrainerView addTrainerView = new AddTrainerView(contentCtrl);
+		AddTrainerView addTrainerView = new AddTrainerView(contentCtrl, deck);
 		addTrainerView.constructPanel();
 		
-		AddEnergyView addEnergyView = new AddEnergyView(contentCtrl);
+		AddEnergyView addEnergyView = new AddEnergyView(contentCtrl, deck);
 		addEnergyView.constructPanel();
 		
 		content.add(deckView, "Deck");

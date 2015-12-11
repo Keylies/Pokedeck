@@ -5,16 +5,16 @@ import java.util.ArrayList;
 public class Pokemon extends Card {
 	private String pokemonType;
 	private int pokemonHp;
-	private int evolutionStage;
-	private Pokemon evolvesFrom;
-	private ArrayList<Attack> attacks;
+//	private int evolutionStage;
+//	private Pokemon evolvesFrom;
+//	private ArrayList<Attack> attacks;
 	
 	public Pokemon() {
 		super();
 	}
 	
-	public Pokemon(String name, String text, int number, String type, int hp) {
-		super(name, text, number);
+	public Pokemon(String name, String desc, int number, String type, int hp) {
+		super(name, desc, number);
 		pokemonType = type;
 		pokemonHp = hp; 
 	}
