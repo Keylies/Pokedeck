@@ -58,7 +58,7 @@ public class FrameView extends JFrame {
 		
 		ContentCtrl contentCtrl = new ContentCtrl(content);
 		
-		DeckView deckView = new DeckView(contentCtrl);
+		DeckView deckView = new DeckView(contentCtrl, deck);
 		deckView.constructPanel();
 		
 		AddMenuView addView = new AddMenuView(contentCtrl);

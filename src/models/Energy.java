@@ -19,7 +19,7 @@ public class Energy extends Card {
 	private String energyType;
 
 	public Energy(String name, String desc, int number, String type) {
-		super(name, desc, number);
+		super(name, type, desc, number);
 		energyType = type;
 	}
 

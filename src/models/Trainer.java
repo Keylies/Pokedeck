@@ -1,5 +1,7 @@
 package models;
 
+import java.util.HashMap;
+
 public class Trainer extends Card {
 	public static String[] trainerTypes = 
 		{
@@ -16,7 +18,7 @@ public class Trainer extends Card {
 	}
 	
 	public Trainer(String name, String desc, int number, String type, String rule) {
-		super(name, desc, number);
+		super(name, type, desc, number);
 		trainerType = type;
 		trainerRule = rule; 
 	}
@@ -25,5 +27,14 @@ public class Trainer extends Card {
 		return "Trainer card : " + cardName + " (n°" + cardNumber + ")\n"
 				+ "\t\t. Type : " + trainerType + "\n"
 				+ "\t\t. Rule : " + trainerRule + "\n";
+	}
+	
+	public HashMap<String, Object> getData() {
+
+		setData();
+		
+		data.put("rule", trainerRule);
+		
+		return data;
 	}
 }

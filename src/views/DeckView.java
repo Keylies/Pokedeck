@@ -7,9 +7,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
+import models.Deck;
+import models.TableModel;
 import controllers.ContentCtrl;
 
 public class DeckView extends JPanel {
+	
+	private Deck deck;
 	
 	ContentCtrl contentCtrl;
 	
@@ -21,9 +25,10 @@ public class DeckView extends JPanel {
 	JButton addViewBtn;
 	JButton deckViewBtn;
 	
-	public DeckView(ContentCtrl contentCtrl) {
+	public DeckView(ContentCtrl contentCtrl, Deck d) {
 		super();
 		this.contentCtrl = contentCtrl;
+		deck = d;
 	}
 	
 	public void constructPanel() {
@@ -51,8 +56,10 @@ public class DeckView extends JPanel {
 	private void constructTablePanel() {
 		tablePnl = new JPanel(new GridLayout(1, 1));
 		
-		JTable table = new JTable();
+		JTable table = new JTable(new TableModel(deck));
 		
 		tablePnl.add(table);
+		
+		
 	}
 }
