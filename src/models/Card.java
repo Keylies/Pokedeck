@@ -19,12 +19,7 @@ public class Card {
 	
 	protected HashMap<String, Object> data;
 	
-	public Card() {
-		cardName = "Blank card";
-		cardType = "Blank card";
-		cardDesc = "Blank card";
-		cardNumber = 0;
-	}
+	public Card() {};
 	
 	public Card(String name, String type, String desc, int number) {
 		cardName = name;
@@ -47,6 +42,10 @@ public class Card {
 		
 		setData();
 		return data;
+	}
+	
+	public void modifyDesc(String desc) {
+		cardDesc = desc;
 	}
 	
 }

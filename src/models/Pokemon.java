@@ -10,11 +10,7 @@ public class Pokemon extends Card {
 //	private Pokemon evolvesFrom;
 //	private ArrayList<Attack> attacks
 	
-	
-	
-	public Pokemon() {
-		super();
-	}
+	public Pokemon() { super(); };
 	
 	public Pokemon(String name, String desc, int number, String type, int hp) {
 		super(name, type, desc, number);

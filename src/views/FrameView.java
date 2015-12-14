@@ -10,15 +10,17 @@ import javax.swing.JPanel;
 
 import models.Deck;
 import controllers.ContentCtrl;
-import controllers.MenuCtrl;
+import controllers.ImportCtrl;
+import controllers.SaveCtrl;
 
 public class FrameView extends JFrame {
 	
-	Deck deck;
+	private Deck deck;
 	
-	JPanel content;
+	private JPanel content;
+	private DeckView deckView;
 	
-	JMenuBar menuBar;
+	private JMenuBar menuBar;
 	
 	public FrameView () {
 		super();
@@ -44,11 +46,15 @@ public class FrameView extends JFrame {
 		
 		menuBar = new JMenuBar();
 		JMenu menuFile = new JMenu("File");
-		JMenuItem importItem = new JMenuItem("Import");
 		
-		importItem.addActionListener(new MenuCtrl());
+		JMenuItem importItem = new JMenuItem("Import");
+		importItem.addActionListener(new ImportCtrl(this, deck));
+		
+		JMenuItem saveItem = new JMenuItem("Save");
+		saveItem.addActionListener(new SaveCtrl(this, deck));
 		
 		menuFile.add(importItem);
+		menuFile.add(saveItem);
 		menuBar.add(menuFile);
 	}
 	

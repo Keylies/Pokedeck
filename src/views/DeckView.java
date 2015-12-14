@@ -1,15 +1,18 @@
 package views;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import models.Deck;
 import models.TableModel;
 import controllers.ContentCtrl;
+import controllers.TableCtrl;
 
 public class DeckView extends JPanel {
 	
@@ -56,10 +59,14 @@ public class DeckView extends JPanel {
 	private void constructTablePanel() {
 		tablePnl = new JPanel(new GridLayout(1, 1));
 		
-		JTable table = new JTable(new TableModel(deck));
+		TableModel tableModel = new TableModel(deck);
+		JTable table = new JTable(tableModel);
+		//table.setAutoCreateRowSorter(true);
+		tableModel.addTableModelListener(new TableCtrl());
 		
-		tablePnl.add(table);
+		JScrollPane scrollPane = new JScrollPane(table);
 		
+		tablePnl.add(scrollPane);
 		
 	}
 }

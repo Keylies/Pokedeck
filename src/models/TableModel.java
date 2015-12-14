@@ -34,6 +34,19 @@ public class TableModel extends AbstractTableModel {
 	public int getRowCount() {
 		return deck.getCards().size();
 	}
+	
+	public String getColumnName(int col) {
+        return columnNames[col];
+    }
+	
+	public Class getColumnClass(int col) {
+        return getValueAt(0, col).getClass();
+    }
+	
+	public boolean isCellEditable(int row, int col) {
+
+        return (col == 3) ? true : false;
+    }
 
 	@Override
 	public Object getValueAt(int row, int col) {
@@ -71,4 +84,13 @@ public class TableModel extends AbstractTableModel {
 		return value;
 		
 	}
+	
+	public void setValueAt(Object value, int row, int col) {
+		
+		Card card = deck.getCards().get(row);
+		
+		card.modifyDesc(value.toString());
+
+        fireTableCellUpdated(row, col);
+    }
 }

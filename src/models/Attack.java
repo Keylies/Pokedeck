@@ -7,4 +7,6 @@ public class Attack {
 	private String attackText;
 	private int attackDamage;
 	private ArrayList<Energy> energyNeeded;
+	
+	
 }

@@ -8,7 +8,7 @@ public class Deck {
 	
 	public Deck() {
 		cards = new ArrayList<Card>();
-	};
+	}
 	
 	public ArrayList<Card> getCards() {
 		return cards;
@@ -17,4 +17,5 @@ public class Deck {
 	public void addToDeck(Card newCard) {
 		cards.add(newCard);
 	}
+
 }
