@@ -56,7 +56,7 @@ public class TableModel extends AbstractTableModel {
 		String cardType = card.getClass().getName();
 		cardType = cardType.substring(cardType.indexOf(".") + 1, cardType.length());
 		
-		data = cardType.equals("Pokemon") ? ((Pokemon) card).getData() : cardType.equals("Trainer") ? ((Trainer) card).getData() : card.getData();
+		//data = cardType.equals("Pokemon") ? ((Pokemon) card).getData() : cardType.equals("Trainer") ? ((Trainer) card).getData() : card.getData();
 		
 		Object value = null;
 		
@@ -65,19 +65,19 @@ public class TableModel extends AbstractTableModel {
 	            value = cardType;
 	            break;
 	        case 1:
-	            value = data.get("name");
+	            value = card.getName();
 	            break;
 	        case 2:
-	            value = data.get("type");
+	            value = card.getType();
 	            break;
 	        case 3:
-	            value = data.get("desc");
+	            value = card.getDesc();
 	            break;
 	        case 4:
-	            value = cardType.equals("Pokemon") ? data.get("hp") : cardType.equals("Trainer") ? data.get("rule") : "";
+	            value = cardType.equals("Pokemon") ? ((Pokemon) card).getHp() : cardType.equals("Trainer") ? ((Trainer) card).getRule() : "";
 	            break;
 	        case 5:
-	            value = data.get("number");
+	            value = card.getNumber();
 	            break;
 		}
 			

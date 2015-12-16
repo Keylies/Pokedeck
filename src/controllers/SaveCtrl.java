@@ -1,11 +1,9 @@
 package controllers;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
@@ -14,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import models.Deck;
 import views.FrameView;
+
 
 
 public class SaveCtrl implements ActionListener {

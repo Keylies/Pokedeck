@@ -29,8 +29,6 @@ public class ImportCtrl implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent evt) {
-		for ( Card card : deck.getCards() )
-			System.out.println(card.toString());
 		
 		int returnVal = fc.showOpenDialog(fc);
 		ObjectMapper mapper = new ObjectMapper();
@@ -42,7 +40,8 @@ public class ImportCtrl implements ActionListener {
             try {
             	
 				deck = mapper.readValue(file, Deck.class);
-System.out.println(frameView.getContentPane().getName());
+				for ( Card card : deck.getCards() )
+					System.out.println(card.toString());
 			} catch (JsonParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
