@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import models.Card;
 import models.Deck;
+import models.TableModel;
 import views.FrameView;
 
 
@@ -19,11 +20,13 @@ public class ImportCtrl implements ActionListener {
 	
 	private FrameView frameView;
 	private Deck deck;
+	private TableModel tableModel;
 	private JFileChooser fc;
 	
-	public ImportCtrl(FrameView fv, Deck d) {
+	public ImportCtrl(FrameView fv, Deck d, TableModel tm) {
 		frameView = fv;
 		deck = d;
+		tableModel = tm;
 		fc = new JFileChooser();
 	}
 
@@ -40,8 +43,8 @@ public class ImportCtrl implements ActionListener {
             try {
             	
 				deck = mapper.readValue(file, Deck.class);
-				for ( Card card : deck.getCards() )
-					System.out.println(card.toString());
+				frameView.update(deck);
+
 			} catch (JsonParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

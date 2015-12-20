@@ -61,10 +61,11 @@ public class DeckView extends JPanel {
 		
 		TableModel tableModel = new TableModel(deck);
 		JTable table = new JTable(tableModel);
-		//table.setAutoCreateRowSorter(true);
+
 		tableModel.addTableModelListener(new TableCtrl());
 		
 		JScrollPane scrollPane = new JScrollPane(table);
+		table.setFillsViewportHeight(true);
 		
 		tablePnl.add(scrollPane);
 		
