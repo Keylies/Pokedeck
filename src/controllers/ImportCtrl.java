@@ -10,54 +10,60 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import models.Card;
 import models.Deck;
-import models.TableModel;
 import views.FrameView;
 
-
+/**
+ * importItem's controller, called when the import JMenuItem is pressed
+ * 
+ * @author Clément
+ *
+ */
 public class ImportCtrl implements ActionListener {
 	
 	private FrameView frameView;
 	private Deck deck;
-	private TableModel tableModel;
 	private JFileChooser fc;
 	
-	public ImportCtrl(FrameView fv, Deck d, TableModel tm) {
+	public ImportCtrl(FrameView fv, Deck d) {
 		frameView = fv;
 		deck = d;
-		tableModel = tm;
 		fc = new JFileChooser();
 	}
 
+	/*
+	 * Open a dialog frame
+	 * Replace the current deck with JSON values from the file selected
+	 * Update the frame
+	 * 
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent evt) {
 		
-		int returnVal = fc.showOpenDialog(fc);
+		int returnVal = fc.showOpenDialog(frameView);
 		ObjectMapper mapper = new ObjectMapper();
 		
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			
             File file = fc.getSelectedFile();
-            //This is where a real application would open the file.
 
             try {
             	
 				deck = mapper.readValue(file, Deck.class);
 				frameView.update(deck);
-
 			} catch (JsonParseException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			} catch (JsonMappingException e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
 			}
-
         } else {
-        	System.out.println("fail");
+        	System.out.println("File error");
         }
    
 	}

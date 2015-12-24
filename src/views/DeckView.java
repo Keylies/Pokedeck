@@ -1,19 +1,29 @@
 package views;
 
-import java.awt.Dimension;
-import java.awt.GridLayout;
-
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.TableRowSorter;
 
 import models.Deck;
 import models.TableModel;
 import controllers.ContentCtrl;
-import controllers.TableCtrl;
 
+/**
+ * View for the deck, show cards details in a table
+ * 
+ * @author Clément
+ *
+ */
 public class DeckView extends JPanel {
 	
 	private Deck deck;
@@ -28,6 +38,9 @@ public class DeckView extends JPanel {
 	JButton addViewBtn;
 	JButton deckViewBtn;
 	
+	JTextField filterTxt;
+	TableRowSorter<TableModel> sorter;
+	
 	public DeckView(ContentCtrl contentCtrl, Deck d) {
 		super();
 		this.contentCtrl = contentCtrl;
@@ -36,7 +49,8 @@ public class DeckView extends JPanel {
 	
 	public void constructPanel() {
 		
-		this.setLayout(new GridLayout(4, 1, 10, 10));
+		this.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
 		
 		titleLbl = new JLabel("Pokedeck");
 		
@@ -46,28 +60,91 @@ public class DeckView extends JPanel {
 		constructSearchPanel();
 		constructTablePanel();
 		
-		this.add(titleLbl);
-		this.add(addViewBtn);
-		this.add(searchPnl);
-		this.add(tablePnl);
+		c.insets = new Insets(10,0,0,0);
+		
+		c.gridx = 0;
+		c.gridy = 0;
+		this.add(titleLbl, c);
+
+		c.gridx = 0;
+		c.gridy = 1;
+		this.add(addViewBtn, c);
+		
+		c.gridx = 0;
+		c.gridy = 2;
+		this.add(searchPnl, c);
+		
+		c.gridx = 0;
+		c.gridy = 3;
+		this.add(tablePnl, c);
 	}
 	
 	private void constructSearchPanel() {
-		searchPnl = new JPanel(new GridLayout(2, 3));
+
+		searchPnl = new JPanel(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		
+		JLabel filterLbl = new JLabel("Search :");
+		
+		filterTxt = new JTextField(10);
+
+		filterTxt.getDocument().addDocumentListener(
+			new DocumentListener() {
+	           public void changedUpdate(DocumentEvent e) {
+	               newFilter();
+	           }
+	           public void insertUpdate(DocumentEvent e) {
+	               newFilter();
+	           }
+	           public void removeUpdate(DocumentEvent e) {
+	               newFilter();
+	           }
+			});
+		
+		c.insets = new Insets(0,5,0,5);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		
+		c.gridx = 0;
+		c.gridy = 0;
+		searchPnl.add(filterLbl, c);
+
+		c.gridx = 1;
+		c.gridy = 0;
+		searchPnl.add(filterTxt, c);
 	}
 	
 	private void constructTablePanel() {
-		tablePnl = new JPanel(new GridLayout(1, 1));
+
+		tablePnl = new JPanel(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
 		
 		TableModel tableModel = new TableModel(deck);
+		sorter = new TableRowSorter<TableModel>(tableModel);
 		JTable table = new JTable(tableModel);
-
-		tableModel.addTableModelListener(new TableCtrl());
 		
 		JScrollPane scrollPane = new JScrollPane(table);
 		table.setFillsViewportHeight(true);
+		//table.setAutoCreateRowSorter(true);
+		table.setRowSorter(sorter);
 		
-		tablePnl.add(scrollPane);
-		
+		c.gridx = 0;
+		c.gridy = 0;
+		tablePnl.add(scrollPane, c);
 	}
+	
+	/**
+	 * Get the value of the filter TextField and sort the table rows with this value
+	 */
+    private void newFilter() {
+    	
+        RowFilter<TableModel, Object> rf = null;
+
+        try {
+            rf = RowFilter.regexFilter(filterTxt.getText());
+        } catch (java.util.regex.PatternSyntaxException e) {
+            return;
+        }
+
+        sorter.setRowFilter(rf);
+    }
 }

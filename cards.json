@@ -1,0 +1,23 @@
+{
+  "cards" : [ {
+    "classType" : "Pokemon",
+    "name" : "Bulbasaur",
+    "desc" : "Bulbasaur is a Grass/Poison type Pokémon introduced in Generation 1. It is known as the \"Seed Pokémon\".",
+    "number" : 1,
+    "type" : "Grass",
+    "hp" : 60
+  }, {
+    "classType" : "Trainer",
+    "name" : "Trainer' Mail",
+    "desc" : "Look at the top 4 cards of your deck. You may reveal a Trainer card you find there (except for Trainers' Mail)  and put it into your hand. Shuffle the other cards back into your deck.",
+    "number" : 92,
+    "type" : "Item",
+    "rule" : "You may play as many Item cards as you like during your turn (before your attack)"
+  }, {
+    "classType" : "Energy",
+    "name" : "Fire",
+    "desc" : "It burns",
+    "number" : 999,
+    "type" : "Fire"
+  } ]
+}

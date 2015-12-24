@@ -10,12 +10,15 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import models.Card;
 import models.Deck;
 import views.FrameView;
 
-
-
+/**
+ * saveItem's controller, called when the save JMenuItem is pressed
+ * 
+ * @author Clément
+ *
+ */
 public class SaveCtrl implements ActionListener {
 	
 	private FrameView frameView;
@@ -23,42 +26,45 @@ public class SaveCtrl implements ActionListener {
 	private JFileChooser fc;
 	
 	public SaveCtrl(FrameView fv, Deck d) {
+		
 		frameView = fv;
 		deck = d;
 		fc = new JFileChooser();
 	}
 
+	/*
+	 * Open a dialog frame
+	 * Save the current deck cards to JSON format in the file selected
+	 * 
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent evt) {
-		int returnVal = fc.showSaveDialog(fc);
+		
+		int returnVal = fc.showSaveDialog(frameView);
 		ObjectMapper mapper = new ObjectMapper();
-		
-		for ( Card card : deck.getCards() )
-			System.out.println(card.toString());
-		
+
         if (returnVal == JFileChooser.APPROVE_OPTION) {
+        	
             File file = fc.getSelectedFile();
-            //This is where a real application would save the file.
+
             try {
+            	
 				mapper.writerWithDefaultPrettyPrinter().writeValue(file, deck);
 			} catch (JsonGenerationException e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
 			} catch (JsonMappingException e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
 			}
            
         } else {
-            System.out.println("fail");
-            
-            
-        }
-
-   
+        	
+            System.out.println("File error");
+        }   
 	}
-
 }

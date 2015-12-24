@@ -7,6 +7,12 @@ import java.awt.event.ActionListener;
 import javax.swing.AbstractButton;
 import javax.swing.JPanel;
 
+/**
+ * FrameView's controller, called when a navigation button is pressed
+ * 
+ * @author Clément
+ * 
+ */
 public class ContentCtrl implements ActionListener {
 	
 	JPanel content;
@@ -17,6 +23,12 @@ public class ContentCtrl implements ActionListener {
 		content = ct;
 	}
 	
+	/*
+	 * Get destination from the pressed button
+	 * Show the linked panel/card
+	 * 
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent evt) {
 

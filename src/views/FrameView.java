@@ -15,16 +15,21 @@ import controllers.ContentCtrl;
 import controllers.ImportCtrl;
 import controllers.SaveCtrl;
 
+/**
+ * Pokedeck frame
+ * 
+ * @author Clément
+ *
+ */
 public class FrameView extends JFrame {
 	
 	private Deck deck;
 	
+	private TableModel tableModel;
+	
 	private JPanel content;
-	private DeckView deckView;
 	
 	private JMenuBar menuBar;
-	
-	private TableModel tableModel;
 	
 	public FrameView () {
 		super();
@@ -44,6 +49,7 @@ public class FrameView extends JFrame {
 		this.setJMenuBar(menuBar);
 		this.add(content);
 
+		this.pack();
 		this.setVisible(true);
 	}
 	
@@ -53,7 +59,7 @@ public class FrameView extends JFrame {
 		JMenu menuFile = new JMenu("File");
 		
 		JMenuItem importItem = new JMenuItem("Import");
-		importItem.addActionListener(new ImportCtrl(this, deck, tableModel));
+		importItem.addActionListener(new ImportCtrl(this, deck));
 		
 		JMenuItem saveItem = new JMenuItem("Save Deck");
 		saveItem.addActionListener(new SaveCtrl(this, deck));
@@ -75,13 +81,13 @@ public class FrameView extends JFrame {
 		AddMenuView addView = new AddMenuView(contentCtrl);
 		addView.constructPanel();
 		
-		AddPokemonView addPokemonView = new AddPokemonView(contentCtrl, deck);
+		AddPokemonView addPokemonView = new AddPokemonView(contentCtrl, deck, tableModel);
 		addPokemonView.constructPanel();
 		
-		AddTrainerView addTrainerView = new AddTrainerView(contentCtrl, deck);
+		AddTrainerView addTrainerView = new AddTrainerView(contentCtrl, deck, tableModel);
 		addTrainerView.constructPanel();
 		
-		AddEnergyView addEnergyView = new AddEnergyView(contentCtrl, deck);
+		AddEnergyView addEnergyView = new AddEnergyView(contentCtrl, deck, tableModel);
 		addEnergyView.constructPanel();
 		
 		content.add(deckView, "Deck");
@@ -91,14 +97,21 @@ public class FrameView extends JFrame {
 		content.add(addEnergyView, "Add Energy card");
 	}
 	
+	/**
+	 * Replace the current deck with a new deck and recreate the Pokedeck with the last
+	 * 
+	 * @param d, the new deck
+	 */
 	public void update(Deck d) {
+		
 		deck = d;
-		for ( Card card : deck.getCards() )
-			System.out.println(card.toString());
+
 		this.setJMenuBar(null);
 		this.remove(content);
+		
 		constructMenu();
 		constructContent();
+		
 		this.setJMenuBar(menuBar);
 		this.add(content);
 		this.validate();

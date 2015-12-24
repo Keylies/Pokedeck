@@ -1,8 +1,12 @@
 package models;
 import java.util.ArrayList;
 
-
-
+/**
+ * Contains all the cards
+ * 
+ * @author Clément
+ *
+ */
 public class Deck {
 	
 	private ArrayList<Card> cards;
@@ -19,4 +23,7 @@ public class Deck {
 		cards.add(newCard);
 	}
 
+	public void removeFromDeck(Card oldCard) {
+		cards.remove(oldCard);
+	}
 }

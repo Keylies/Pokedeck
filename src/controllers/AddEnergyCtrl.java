@@ -3,21 +3,38 @@ package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import models.Card;
 import models.Deck;
 import models.Energy;
+import models.TableModel;
 import views.AddEnergyView;
 
+/**
+ * AddEnergyView's controller, called when the Add button is pressed
+ * 
+ * @author Clément
+ *
+ */
 public class AddEnergyCtrl implements ActionListener {
 
 	private AddEnergyView addView;
 	private Deck deck;
+	private TableModel tableModel;
 	
-	public AddEnergyCtrl(AddEnergyView aev, Deck d) {
+	public AddEnergyCtrl(AddEnergyView aev, Deck d, TableModel tm) {
+		
 		addView = aev;
 		deck = d;
+		tableModel = tm;
 	}
 
+	/*
+	 * Get textfields' values from AddEnergyView in order to create a new Energy card 
+	 * Add it to the current Deck
+	 * Call to the view's reset function
+	 * Update the table model
+	 * 
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent evt) {
 		
@@ -28,8 +45,9 @@ public class AddEnergyCtrl implements ActionListener {
 		
 		deck.addToDeck(new Energy(name, desc, number, type));
 		
-		for ( Card card : deck.getCards() )
-			System.out.println(card.toString());
+		addView.reset();
+		
+		tableModel = new TableModel(deck);
 	}
 
 }

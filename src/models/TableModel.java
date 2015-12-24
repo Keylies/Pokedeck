@@ -1,9 +1,13 @@
 package models;
 
-import java.util.HashMap;
-
 import javax.swing.table.AbstractTableModel;
 
+/**
+ * Custom model for the deck view table
+ * 
+ * @author Clément
+ *
+ */
 public class TableModel extends AbstractTableModel {
 	
 	private Deck deck;
@@ -14,38 +18,45 @@ public class TableModel extends AbstractTableModel {
 			"Name",
             "Type",
             "Desc",
-            "Rule / HP",
+            "HP",
+            "Rule",
             "Number"
         };
 	
-	private HashMap<String, Object> data;
-	
 	public TableModel(Deck d) {
+		
 		super();
 		deck = d;
 	}
 
 	@Override
 	public int getColumnCount() {
+		
 		return columnNames.length;
 	}
 
 	@Override
 	public int getRowCount() {
+		
 		return deck.getCards().size();
 	}
 	
 	public String getColumnName(int col) {
+		
         return columnNames[col];
     }
 	
 	public Class getColumnClass(int col) {
+		
+		if (deck.getCards().isEmpty())
+	        return Object.class;
+		
         return getValueAt(0, col).getClass();
     }
 	
 	public boolean isCellEditable(int row, int col) {
 
-        return (col == 3) ? true : false;
+        return col == 3;
     }
 
 	@Override
@@ -55,8 +66,6 @@ public class TableModel extends AbstractTableModel {
 		
 		String cardType = card.getClass().getName();
 		cardType = cardType.substring(cardType.indexOf(".") + 1, cardType.length());
-		
-		//data = cardType.equals("Pokemon") ? ((Pokemon) card).getData() : cardType.equals("Trainer") ? ((Trainer) card).getData() : card.getData();
 		
 		Object value = null;
 		
@@ -74,15 +83,17 @@ public class TableModel extends AbstractTableModel {
 	            value = card.getDesc();
 	            break;
 	        case 4:
-	            value = cardType.equals("Pokemon") ? ((Pokemon) card).getHp() : cardType.equals("Trainer") ? ((Trainer) card).getRule() : "";
+	            value = cardType.equals("Pokemon") ? ((Pokemon) card).getHp() : "None";
 	            break;
 	        case 5:
+	            value = cardType.equals("Trainer") ? ((Trainer) card).getRule() : "None";
+	            break;
+	        case 6:
 	            value = card.getNumber();
 	            break;
 		}
 			
 		return value;
-		
 	}
 	
 	public void setValueAt(Object value, int row, int col) {
@@ -90,7 +101,5 @@ public class TableModel extends AbstractTableModel {
 		Card card = deck.getCards().get(row);
 		
 		card.modifyDesc(value.toString());
-
-        fireTableCellUpdated(row, col);
     }
 }
