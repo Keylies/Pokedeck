@@ -3,6 +3,7 @@ package views;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,8 +13,10 @@ import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableRowSorter;
 
+import models.CustomTableCellEditor;
 import models.Deck;
 import models.TableModel;
 import controllers.ContentCtrl;
@@ -122,9 +125,11 @@ public class DeckView extends JPanel {
 		sorter = new TableRowSorter<TableModel>(tableModel);
 		JTable table = new JTable(tableModel);
 		
+		TableColumn typeColumn = table.getColumnModel().getColumn(2);
+		typeColumn.setCellEditor(new CustomTableCellEditor(deck));
+		
 		JScrollPane scrollPane = new JScrollPane(table);
 		table.setFillsViewportHeight(true);
-		//table.setAutoCreateRowSorter(true);
 		table.setRowSorter(sorter);
 		
 		c.gridx = 0;

@@ -30,4 +30,8 @@ public class Trainer extends Card {
 	public String getRule() {
 		return trainerRule;
 	}
+	
+	public void setRule(String rule) {
+		trainerRule = rule;
+	}
 }

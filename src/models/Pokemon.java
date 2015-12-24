@@ -22,4 +22,8 @@ public class Pokemon extends Card {
 	public int getHp() {
 		return pokemonHp;
 	}
+	
+	public void setHp(int hp) {
+		pokemonHp = hp;
+	}
 }

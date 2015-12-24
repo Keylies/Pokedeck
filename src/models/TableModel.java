@@ -24,7 +24,7 @@ public class TableModel extends AbstractTableModel {
         };
 	
 	public TableModel(Deck d) {
-		
+
 		super();
 		deck = d;
 	}
@@ -56,7 +56,7 @@ public class TableModel extends AbstractTableModel {
 	
 	public boolean isCellEditable(int row, int col) {
 
-        return col == 3;
+        return col > 0;
     }
 
 	@Override
@@ -100,6 +100,32 @@ public class TableModel extends AbstractTableModel {
 		
 		Card card = deck.getCards().get(row);
 		
-		card.modifyDesc(value.toString());
+		String cardType = card.getClass().getName();
+		cardType = cardType.substring(cardType.indexOf(".") + 1, cardType.length());
+		
+		switch (col) {
+	        case 1:
+	        	card.setName(value.toString());
+	            break;
+	        case 2:
+	        	card.setType(value.toString());
+	            break;
+	        case 3:
+	        	card.setDesc(value.toString());
+	            break;
+	        case 4:
+	        	if ( cardType.equals("Pokemon") )
+	        		((Pokemon) card).setHp((int) value);
+	            break;
+	        case 5:
+	        	if ( cardType.equals("Trainer") )
+	        		((Trainer) card).setRule(value.toString());
+	            break;
+	        case 6:
+	        	card.setNumber((int) value);
+	            break;
+		}
+		
+		fireTableCellUpdated(row,col);
     }
 }

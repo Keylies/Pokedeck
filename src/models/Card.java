@@ -46,9 +46,20 @@ public class Card {
 		cardNumber = number;
 	}
 	
+	public void setName(String name) {
+		cardName = name;
+	}
 	
-	public void modifyDesc(String desc) {
+	public void setDesc(String desc) {
 		cardDesc = desc;
+	}
+	
+	public void setType(String type) {
+		cardType = type;
+	}
+	
+	public void setNumber(int number) {
+		cardNumber = number;
 	}
 	
 	public String getName() {
