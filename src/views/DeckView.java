@@ -3,7 +3,6 @@ package views;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,6 +19,7 @@ import models.CustomTableCellEditor;
 import models.Deck;
 import models.TableModel;
 import controllers.ContentCtrl;
+import controllers.RemoveCardCtrl;
 
 /**
  * View for the deck, show cards details in a table
@@ -31,18 +31,20 @@ public class DeckView extends JPanel {
 	
 	private Deck deck;
 	
-	ContentCtrl contentCtrl;
+	private ContentCtrl contentCtrl;
 	
-	JPanel searchPnl;
-	JPanel tablePnl;
+	private JPanel searchPnl;
+	private JPanel tablePnl;
 	
-	JLabel titleLbl;
+	private JLabel titleLbl;
 	
-	JButton addViewBtn;
-	JButton deckViewBtn;
+	private JButton addViewBtn;
 	
-	JTextField filterTxt;
-	TableRowSorter<TableModel> sorter;
+	private JTable table;
+	private TableModel tableModel;
+	
+	private JTextField filterTxt;
+	private TableRowSorter<TableModel> sorter;
 	
 	public DeckView(ContentCtrl contentCtrl, Deck d) {
 		super();
@@ -51,7 +53,7 @@ public class DeckView extends JPanel {
 	}
 	
 	public void constructPanel() {
-		
+
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
@@ -64,7 +66,7 @@ public class DeckView extends JPanel {
 		constructTablePanel();
 		
 		c.insets = new Insets(10,0,0,0);
-		
+
 		c.gridx = 0;
 		c.gridy = 0;
 		this.add(titleLbl, c);
@@ -77,6 +79,9 @@ public class DeckView extends JPanel {
 		c.gridy = 2;
 		this.add(searchPnl, c);
 		
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weightx = 1;
+		c.weighty = 1;
 		c.gridx = 0;
 		c.gridy = 3;
 		this.add(tablePnl, c);
@@ -104,8 +109,13 @@ public class DeckView extends JPanel {
 	           }
 			});
 		
+		JButton rmvBtn = new JButton("Remove selected card");
+		rmvBtn.addActionListener(new RemoveCardCtrl(this, deck, tableModel));
+		
 		c.insets = new Insets(0,5,0,5);
 		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weightx = 1;
+		c.weighty = 1;
 		
 		c.gridx = 0;
 		c.gridy = 0;
@@ -114,6 +124,10 @@ public class DeckView extends JPanel {
 		c.gridx = 1;
 		c.gridy = 0;
 		searchPnl.add(filterTxt, c);
+		
+		c.gridx = 2;
+		c.gridy = 0;
+		searchPnl.add(rmvBtn, c);
 	}
 	
 	private void constructTablePanel() {
@@ -121,17 +135,25 @@ public class DeckView extends JPanel {
 		tablePnl = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
-		TableModel tableModel = new TableModel(deck);
+		tableModel = new TableModel(deck);
 		sorter = new TableRowSorter<TableModel>(tableModel);
-		JTable table = new JTable(tableModel);
+		table = new JTable(tableModel);
 		
 		TableColumn typeColumn = table.getColumnModel().getColumn(2);
-		typeColumn.setCellEditor(new CustomTableCellEditor(deck));
+		typeColumn.setCellEditor(new CustomTableCellEditor(deck));	
 		
 		JScrollPane scrollPane = new JScrollPane(table);
 		table.setFillsViewportHeight(true);
+		table.setRowHeight(30);
 		table.setRowSorter(sorter);
+		table.getColumnModel().getColumn(0).setMaxWidth(60);
+		table.getColumnModel().getColumn(2).setMaxWidth(77);
+		table.getColumnModel().getColumn(4).setMaxWidth(40);
+		table.getColumnModel().getColumn(6).setMaxWidth(40);
 		
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weightx = 1;
+		c.weighty = 1;
 		c.gridx = 0;
 		c.gridy = 0;
 		tablePnl.add(scrollPane, c);
@@ -151,5 +173,14 @@ public class DeckView extends JPanel {
         }
 
         sorter.setRowFilter(rf);
+    }
+    
+    /**
+     * Get the index of the selected table row.
+     * 
+     * @return an int
+     */
+    public int getRow() {
+    	return table.getSelectedRow();
     }
 }

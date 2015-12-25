@@ -45,11 +45,11 @@ public class FrameView extends JFrame {
 		
 		this.setTitle("Pokedeck, gotta catch 'em all");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(600, 600);
+		this.setSize(800, 600);
 		this.setJMenuBar(menuBar);
 		this.add(content);
 
-		this.pack();
+	
 		this.setVisible(true);
 	}
 	

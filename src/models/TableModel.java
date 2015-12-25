@@ -1,5 +1,6 @@
 package models;
 
+import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -20,7 +21,7 @@ public class TableModel extends AbstractTableModel {
             "Desc",
             "HP",
             "Rule",
-            "Number"
+            "N°"
         };
 	
 	public TableModel(Deck d) {
@@ -56,7 +57,7 @@ public class TableModel extends AbstractTableModel {
 	
 	public boolean isCellEditable(int row, int col) {
 
-        return col > 0;
+        return col > 0 ;
     }
 
 	@Override

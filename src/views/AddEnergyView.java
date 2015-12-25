@@ -48,6 +48,8 @@ public class AddEnergyView extends AddView {
 		c.gridy = 0;
 		this.add(titlePnl, c);
 		
+		c.fill = GridBagConstraints.NONE;
+		c.ipadx = 400;
 		c.gridx = 0;
 		c.gridy = 1;
 		this.add(contentPnl, c);
